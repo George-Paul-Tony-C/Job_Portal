@@ -7,21 +7,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Use the latest version
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # Use the latest version
         with:
-          node-version: '18'
+          node-version: '20' # Using LTS version 20 is common
+          cache: 'npm' # Enable caching for npm
 
       - name: Install Backend Dependencies
-        run: cd backend && npm install
+        working-directory: ./backend # Set working directory for this and subsequent steps
+        run: npm install
 
       - name: Run Backend Linter
-        run: cd backend && npx eslint .
+        working-directory: ./backend
+        run: npm run lint # It's better to use an npm script
 
       - name: Install Frontend Dependencies
-        run: cd frontend && npm install
+        working-directory: ./frontend
+        run: npm install
 
       - name: Run Frontend Linter
-        run: cd frontend && npx eslint .
+        working-directory: ./frontend
+        run: npm run lint
