@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v4 # Use the latest version
         with:
           node-version: '20' # Using LTS version 20 is common
-          cache: 'npm' # Enable caching for npm
+          # cache: 'npm' # Enable caching for npm
 
       - name: Install Backend Dependencies
         working-directory: ./backend # Set working directory for this and subsequent steps
